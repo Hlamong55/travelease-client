@@ -1,12 +1,11 @@
 // src/components/Shared/Navbar.jsx
 import { useState } from "react";
 import { Link, NavLink } from "react-router";
-import { HiMenu, HiX } from "react-icons/hi"; // ✅ React Icons
+import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // ✅ Navigation Links (no bullet, clean structure)
   const navLinks = [
     { name: "Home", to: "/" },
     { name: "All Vehicles", to: "/allVehicles" },
@@ -19,8 +18,9 @@ const Navbar = () => {
     <nav className="bg-primary text-white sticky top-0 z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* ✅ Logo */}
-          <div className="shrink-0">
+          
+          <div className="shrink-0 flex items-center gap-2">
+            <img src="https://i.ibb.co.com/QjkHXLkH/istockphoto-931069196-612x612.jpg" className="rounded-full h-10 w-10" alt="" />
             <Link
               to="/"
               className="text-2xl font-bold hover:text-secondary transition-colors"
@@ -29,7 +29,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* ✅ Desktop Menu */}
+          
           <div className="hidden md:flex space-x-6 items-center">
             {navLinks.map((link) => (
               <NavLink
@@ -52,7 +52,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* ✅ Mobile Menu Toggle */}
+         
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -68,7 +68,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ✅ Mobile Menu */}
+      
       {mobileMenuOpen && (
         <div className="md:hidden bg-primary text-white px-4 pb-3 space-y-2">
           {navLinks.map((link) => (

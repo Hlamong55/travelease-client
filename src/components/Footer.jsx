@@ -1,20 +1,29 @@
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white mt-12">
+    <footer className="bg-primary text-white">
       <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
-        {/* 1️⃣ Brand */}
+        
         <div>
-          <h2 className="text-2xl font-bold mb-3">TravelEase</h2>
-          <p className="text-sm text-gray-200 leading-relaxed">
+           <div className="flex items-center gap-5 mt-5">
+            <img src="https://i.ibb.co.com/QjkHXLkH/istockphoto-931069196-612x612.jpg" className="rounded-full w-24 h-24" alt="" />
+          
+          <div>
+            <h2 className="text-3xl font-bold mb-3">TravelEase</h2>
+           <p className="text-sm text-gray-200 leading-relaxed">
             Simplifying your travel experience — rent, ride and relax with ease.
           </p>
+          </div>
+           </div>
+         
+         
         </div>
 
-        {/* 2️⃣ Quick Links */}
-        <div>
+        
+        <div className="text-center">
           <h3 className="text-lg font-semibold mb-3 border-b border-secondary pb-2 inline-block">
             Quick Links
           </h3>
@@ -34,7 +43,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* 3️⃣ Social Icons */}
+        
         <div>
           <h3 className="text-lg font-semibold mb-3 border-b border-secondary pb-2 inline-block">
             Connect With Us
@@ -47,7 +56,7 @@ const Footer = () => {
               <FaInstagram size={20} />
             </a>
             <a href="#" className="hover:text-secondary transition">
-              <FaTwitter size={20} />
+              <FaXTwitter size={20} />
             </a>
             <a href="#" className="hover:text-secondary transition">
               <FaLinkedinIn size={20} />
