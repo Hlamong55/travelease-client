@@ -66,7 +66,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="bg-secondary text-black text-center py-3 text-sm font-medium">
+      <div className="bg-purple-900 text-gray-50 text-center py-3 text-sm font-medium">
         © {new Date().getFullYear()} TravelEase. All rights reserved.
       </div>
     </footer>
