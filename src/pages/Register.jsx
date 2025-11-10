@@ -4,11 +4,15 @@ import { toast } from "react-hot-toast";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase/firebase.init";
 
 const Register = () => {
-  const { createUser, updateUserProfile, signInWithGoogle } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,15 +51,33 @@ const Register = () => {
   };
 
   const handleGoogleLogin = async () => {
-    try {
-      await signInWithGoogle();
-      toast.success("Logged in with Google ✅");
-      navigate("/");
-    } catch (err) {
-      console.error(err);
-      toast.error("Google login failed.");
-    }
-  };
+      try {
+        const res = await signInWithPopup(auth, googleProvider);
+        Swal.fire({
+          title: "✅ Logged In!",
+          text: `Welcome, ${res.user.displayName || "Traveler"}!`,
+          icon: "success",
+          background: "#1e1e2f",
+          color: "#fff",
+          confirmButtonColor: "#6A11CB",
+          confirmButtonText: "Continue",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const from = location.state?.from || "/";
+            navigate(from, { replace: true });
+          }
+        });
+      } catch (err) {
+        Swal.fire({
+          title: "❌ Google Login Failed!",
+          text: err.message,
+          icon: "error",
+          background: "#2f1e1e",
+          color: "#fff",
+          confirmButtonColor: "#6A11CB",
+        });
+      }
+    };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-gray-100">
