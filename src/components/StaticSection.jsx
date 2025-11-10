@@ -2,6 +2,7 @@ import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaCarAlt } from "react-icons/fa";
+import { BiSearch } from "react-icons/bi";
 
 const StaticSections = () => {
   const categories = [
@@ -27,10 +28,8 @@ const StaticSections = () => {
     },
   ];
 
-
   return (
     <div className="bg-gray-100 text-text overflow-hidden font-sans">
-     
       <section className="max-w-7xl mx-auto px-6 py-16 text-center">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -40,7 +39,10 @@ const StaticSections = () => {
           className="text-3xl md:text-4xl font-bold mb-12 text-gray-700"
         >
           <div className="flex items-center justify-center gap-3">
-            Top Vehicle Categories <span className="text-secondary h-8"><FaCarAlt size={40}/></span>
+            Top Vehicle Categories{" "}
+            <span className="text-secondary h-8">
+              <FaCarAlt size={40} />
+            </span>
           </div>
         </motion.h2>
 
@@ -71,7 +73,6 @@ const StaticSections = () => {
         </div>
       </section>
 
-
       <section className="bg-gray-100 border-t-2 border-gray-400">
         <div className="max-w-6xl mx-auto px-6 py-16 text-center">
           <motion.h2
@@ -89,15 +90,34 @@ const StaticSections = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-gray-600 leading-relaxed text-base md:text-lg"
+            className="max-w-3xl mx-auto text-gray-600 leading-relaxed text-base md:text-lg mb-10"
           >
-            <span className="text-secondary font-semibold">TravelEase</span> is your trusted
-            companion for vehicle booking and trip management. Whether you're
-            planning a short drive or a long road trip, you can find, list, and
-            manage vehicles effortlessly. Our platform ensures seamless
-            experience, verified owners, and easy booking—so you can focus on
-            your journey, not the hassle.
+            <span className="text-secondary font-semibold">TravelEase</span> is
+            your trusted companion for vehicle booking and trip management.
+            Whether you're planning a short drive or a long road trip, you can
+            find, list, and manage vehicles effortlessly. Our platform ensures a
+            seamless experience, verified owners, and easy booking—so you can
+            focus on your journey, not the hassle.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="flex justify-center"
+          >
+            <div className="flex w-full max-w-md rounded-full overflow-hidden shadow-lg">
+              <input
+                type="text"
+                placeholder="Search for Cars..."
+                className="flex-1 px-5 py-3 text-gray-700 border rounded-l-full "
+              />
+              <button className="bg-linear-to-r from-[#6A11CB] to-[#2575FC] text-white px-5 py-3">
+                <BiSearch size={22} />
+              </button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

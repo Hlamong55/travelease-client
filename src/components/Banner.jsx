@@ -1,4 +1,6 @@
 import React from 'react';
+import { FaListUl } from 'react-icons/fa';
+import { LuSquareArrowOutUpRight } from 'react-icons/lu';
 import { Link } from 'react-router';
 
 const Banner = () => {
@@ -13,18 +15,18 @@ const Banner = () => {
           <p className="text-gray-600 text-lg md:text-xl">
             Explore, rent, and manage vehicles with ease. Your travel companion for a smooth journey.
           </p>
-          <div className="space-x-5">
+          <div className="flex gap-5 justify-center md:justify-normal">
             <Link
               to="/allVehicles"
               className="bg-secondary text-text px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition hover:text-white"
             >
-              All Vehicles
+              <span className='flex items-center gap-2'>All Vehicles<LuSquareArrowOutUpRight size={25}/></span>
             </Link>
             <Link
               to="/addVehicle"
               className="bg-secondary text-text px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition hover:text-white"
             >
-              List Your Vehicle
+              <span className='flex items-center gap-2'>List Your Vehicle <FaListUl size={20}/></span>
             </Link>
           </div>
         </div>

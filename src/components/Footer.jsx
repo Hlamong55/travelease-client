@@ -23,7 +23,7 @@ const Footer = () => {
         </div>
 
         
-        <div className="text-center">
+        <div className="md:text-center">
           <h3 className="text-lg font-semibold mb-3 border-b border-secondary pb-2 inline-block">
             Quick Links
           </h3>

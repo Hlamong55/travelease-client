@@ -6,6 +6,8 @@ import AllVehicles from "../pages/AllVehicles";
 import MyVehicles from "../pages/MyVehicles";
 import MyBookings from "../pages/MyBookings";
 import AddVehicles from "../pages/AddVehicles";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
         path: "addVehicle",
         element: <AddVehicles />,
       },
+      {
+        path: "register",
+        element: <Register />
+      },
+      {
+        path: "login",
+        element: <Login></Login>
+      }
     ],
   },
 ]);
