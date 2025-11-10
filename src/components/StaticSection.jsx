@@ -74,50 +74,66 @@ const StaticSections = () => {
       </section>
 
       <section className="bg-gray-100 border-t-2 border-gray-400">
-        <div className="max-w-6xl mx-auto px-6 py-16 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        <div className="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10">
+         
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold mb-6 text-gray-700"
+            className="w-full md:w-1/2 flex justify-center"
           >
-            About <span className="text-secondary">TravelEase</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-gray-600 leading-relaxed text-base md:text-lg mb-10"
-          >
-            <span className="text-secondary font-semibold">TravelEase</span> is
-            your trusted companion for vehicle booking and trip management.
-            Whether you're planning a short drive or a long road trip, you can
-            find, list, and manage vehicles effortlessly. Our platform ensures a
-            seamless experience, verified owners, and easy booking—so you can
-            focus on your journey, not the hassle.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="flex justify-center"
-          >
-            <div className="flex w-full max-w-md rounded-full overflow-hidden shadow-lg">
-              <input
-                type="text"
-                placeholder="Search for Cars..."
-                className="flex-1 px-5 py-3 text-gray-700 border rounded-l-full "
-              />
-              <button className="bg-linear-to-r from-[#6A11CB] to-[#2575FC] text-white px-5 py-3">
-                <BiSearch size={22} />
-              </button>
-            </div>
+            <img
+              src="https://i.ibb.co.com/Mk66vCtT/360-F-313468655-r-HXrxj-TPVPZB4-HBOVR6-NUm-UZNNsbh-CGO.jpg"
+              className="rounded-3xl shadow-2xl w-full max-w-md object-cover"
+            />
           </motion.div>
+
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-bold mb-6 text-gray-700"
+            >
+              About <span className="text-secondary">TravelEase</span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="max-w-3xl text-gray-600 leading-relaxed text-base md:text-lg mb-10"
+            >
+              <span className="text-secondary font-semibold">TravelEase</span>{" "}
+              is your trusted companion for vehicle booking and trip management.
+              Whether you're planning a short drive or a long road trip, you can
+              find, list, and manage vehicles effortlessly. Our platform ensures
+              a seamless experience, verified owners, and easy booking—so you
+              can focus on your journey, not the hassle.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex justify-center md:justify-start"
+            >
+              <div className="flex w-full max-w-md rounded-full overflow-hidden shadow-lg">
+                <input
+                  type="text"
+                  placeholder="Search for Cars..."
+                  className="flex-1 px-5 py-3 text-gray-700 border rounded-l-full"
+                />
+                <button className="bg-secondary hover:bg-purple-700 transition hover:text-white px-5 py-3">
+                  <BiSearch size={22} />
+                </button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>
