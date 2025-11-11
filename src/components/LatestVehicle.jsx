@@ -10,7 +10,7 @@ const LatestVehicles = () => {
 
   useEffect(() => {
     axiosInstance
-      .get("/vehicles/latest")
+      .get("/latest-vehicle")
       .then((res) => setVehicles(res.data))
       .catch((err) => console.error(err));
   }, [axiosInstance]);
