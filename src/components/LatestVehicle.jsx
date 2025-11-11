@@ -46,7 +46,7 @@ const LatestVehicles = () => {
             >
               <img
                 src={
-                  v.image ||
+                  v.coverImage ||
                   "https://i.ibb.co/QjkHXLkH/istockphoto-931069196-612x612.jpg"
                 }
                 alt={v.name}

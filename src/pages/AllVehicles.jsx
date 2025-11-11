@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import useAxios from "../hooks/useAxios";
-import { FaCarAlt, FaSort } from "react-icons/fa";
 import { Link } from "react-router";
 
 const AllVehicles = () => {
@@ -146,7 +145,7 @@ const AllVehicles = () => {
                 <div className="h-48 w-full overflow-hidden">
                   <motion.img
                     whileHover={{ scale: 1.05 }}
-                    src={vehicle.image}
+                    src={vehicle.coverImage}
                     alt={vehicle.vehicleName}
                     className="w-full h-full object-cover"
                   />

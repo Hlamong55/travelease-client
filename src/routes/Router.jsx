@@ -9,6 +9,7 @@ import AddVehicles from "../pages/AddVehicles";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
+import VehicleDetails from "../pages/VehicleDetails";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,12 @@ export const router = createBrowserRouter([
       {
         path: "allVehicles",
         element: <AllVehicles />,
+      },
+      {
+        path: "vehicle/:id",
+        element: 
+          <VehicleDetails></VehicleDetails>
+  
       },
       {
         path: "myVehicles",
