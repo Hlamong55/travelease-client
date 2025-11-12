@@ -6,6 +6,7 @@ import { FaCarSide, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
 import { IoMdPerson } from "react-icons/io";
 import useAxios from "../hooks/useAxios";
+import Swal from "sweetalert2";
 
 const VehicleDetails = () => {
   const { id } = useParams();
@@ -39,6 +40,44 @@ const VehicleDetails = () => {
     userEmail,
   } = vehicle;
 
+  // === handle booking confirm ===
+  const handleBooking = () => {
+    if (availability !== "Available") {
+      Swal.fire({
+        icon: "error",
+        title: "Already Booked",
+        text: "This vehicle has already been booked!",
+        confirmButtonColor: "#6D28D9",
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: `Confirm Booking?`,
+      text: `Are you sure you want to book ${vehicleName}?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#6D28D9",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Book it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosInstance
+          .patch(`/vehicles/${id}`, { availability: "Booked" })
+          .then(() => {
+            setVehicle((prev) => ({ ...prev, availability: "Booked" }));
+            Swal.fire({
+              title: "Booking Confirmed!",
+              text: `${vehicleName} is now booked.`,
+              icon: "success",
+              confirmButtonColor: "#6D28D9",
+            });
+          })
+          .catch((err) => console.error(err));
+      }
+    });
+  };
+
   return (
     <section className="bg-gray-100 min-h-screen pb-16">
       {/* image */}
@@ -48,14 +87,14 @@ const VehicleDetails = () => {
         transition={{ duration: 0.7 }}
         className="flex justify-center w-full mt-6"
       >
-        <div className="overflow-hidden rounded-3xl shadow-2xl max-w-7xl w-full">
+        <div className="overflow-hidden rounded-3xl shadow-2xl max-w-7xl ">
           <img
             src={
               coverImage ||
               "https://i.ibb.co/QjkHXLkH/istockphoto-931069196-612x612.jpg"
             }
             alt={vehicleName}
-            className="w-full h-[420px] object-cover transform transition-transform duration-700 hover:scale-105"
+            className="w-7xl h-[450px] object-cover transform transition-transform duration-700 hover:scale-105"
           />
         </div>
       </motion.div>
@@ -103,8 +142,16 @@ const VehicleDetails = () => {
           </div>
 
           <div className="pt-4 text-center">
-            <button className="bg-secondary hover:bg-purple-800 text-black hover:text-white font-semibold px-16 py-3 rounded-xl transition duration-300 shadow-md hover:shadow-xl">
-              Book Now 
+            <button
+              onClick={handleBooking}
+              disabled={availability !== "Available"}
+              className={`font-semibold px-16 py-3 rounded-xl transition duration-300 shadow-md hover:shadow-xl ${
+                availability === "Available"
+                  ? "bg-secondary hover:bg-purple-800 text-black hover:text-white"
+                  : "bg-gray-400 text-white cursor-not-allowed"
+              }`}
+            >
+              {availability === "Available" ? "Book Now" : "Already Booked"}
             </button>
           </div>
         </motion.div>

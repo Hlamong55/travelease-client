@@ -55,6 +55,15 @@ const LatestVehicles = () => {
               <div className="p-5 text-left">
                 <p className="badge badge-neutral mb-2">{v.category}</p>
                 <h3 className="text-xl font-bold mb-2">{v.vehicleName}</h3>
+                <p
+                    className={` font-bold badge badge-outline ${
+                      v.availability === "Available"
+                        ? "text-green-600"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {v.availability}
+                  </p>
 
                 <div className="flex justify-between items-center mt-5 px-3">
                   <p className="text-lg font-bold text-purple-700">

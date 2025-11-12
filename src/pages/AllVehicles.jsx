@@ -158,7 +158,7 @@ const AllVehicles = () => {
                     {vehicle.vehicleName}
                   </h3>
                   <p
-                    className={` font-semibold badge badge-outline ${
+                    className={` font-bold badge badge-outline ${
                       vehicle.availability === "Available"
                         ? "text-green-600"
                         : "text-red-500"
