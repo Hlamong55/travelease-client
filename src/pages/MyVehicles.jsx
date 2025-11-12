@@ -106,21 +106,21 @@ const MyVehicles = () => {
                   <div className="flex gap-5 justify-center items-center pt-2">
                     <Link
                       to={`/vehicle/${vehicle._id}`}
-                      className="bg-secondary text-white font-semibold text-sm px-3 py-2 rounded-lg hover:bg-purple-800 transition"
+                      className="bg-secondary text-white font-semibold text-sm px-3 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                     >
                       View Details
                     </Link>
 
                     <Link
                       to={`/update-vehicle/${vehicle._id}`}
-                      className="bg-yellow-400 font-semibold text-sm px-3.5 py-2 rounded-lg hover:bg-yellow-600 hover:text-white transition"
+                      className="bg-yellow-400 font-semibold text-sm px-3.5 py-2 rounded-lg hover:bg-yellow-600 hover:text-white shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                     >
                       Update
                     </Link>
 
                     <button
                       onClick={() => handleDelete(vehicle._id)}
-                      className="bg-red-500 text-white font-semibold text-sm px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                      className="bg-red-500 text-white font-semibold text-sm px-4 py-2 rounded-lg hover:bg-red-700 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                     >
                       Delete
                     </button>

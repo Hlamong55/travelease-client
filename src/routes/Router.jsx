@@ -10,6 +10,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import VehicleDetails from "../pages/VehicleDetails";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login></Login>
+      },
+      {
+        path: "/*",
+        element: <ErrorPage></ErrorPage>
       }
     ],
   },

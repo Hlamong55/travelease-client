@@ -10,21 +10,21 @@ const Banner = () => {
         
         <div className="md:w-1/2 space-y-8">
           <h1 className="text-4xl md:text-5xl font-bold text-text leading-tight">
-            TravelEase-<span className="text-secondary">Vehicle Booking</span> &amp; Trip Management Platform
+            <span className="text-secondary md:ml-32">TravelEase</span> <br /> Vehicle Booking &amp; Trip Management Platform
           </h1>
           <p className="text-gray-600 text-lg md:text-xl">
-            Explore, rent, and manage vehicles with ease. Your travel companion for a smooth journey.
+            Explore, rent, and manage vehicles with ease. Your travel <br /> companion for a smooth journey.
           </p>
           <div className="flex gap-5 justify-center md:justify-normal">
             <Link
               to="/allVehicles"
-              className="bg-secondary text-text px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition hover:text-white"
+              className="bg-secondary hover:bg-primary hover:text-white font-bold px-8 py-3 rounded-xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
             >
               <span className='flex items-center gap-2'>All Vehicles<LuSquareArrowOutUpRight size={25}/></span>
             </Link>
             <Link
               to="/addVehicle"
-              className="bg-secondary text-text px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition hover:text-white"
+              className="bg-secondary hover:bg-primary hover:text-white font-bold px-8 py-3 rounded-xl shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
             >
               <span className='flex items-center gap-2'>List Your Vehicle <FaListUl size={20}/></span>
             </Link>

@@ -84,16 +84,16 @@ const Navbar = () => {
                   <img
                     src={user.photoURL}
                     alt="User"
-                    className="w-11 h-11 rounded-full border-2 border-secondary"
+                    className="w-11 h-11 rounded-full border-2 border-secondary shadow-lg transform transition hover:scale-115 hover:shadow-2xl"
                     title={user.displayName || "User"}
                   />
                 )}
                 <button
                   onClick={handleSignOut}
-                  className="bg-red-500 hover:bg-red-800 px-3 py-1 rounded-md text-white font-medium transition"
+                  className="bg-red-500 hover:bg-red-800 px-3 py-1 rounded-md text-white font-medium shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                 >
                   <span className="flex items-center gap-1.5">
-                    Log Out <LuLogOut size={20} />
+                    Log Out <LuLogOut size={18} />
                   </span>
                 </button>
               </div>
