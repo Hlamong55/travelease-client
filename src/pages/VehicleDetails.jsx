@@ -115,7 +115,7 @@ const VehicleDetails = () => {
             <p className="text-lg text-gray-700 leading-relaxed">{description}</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 bg-gray-100 p-5 rounded-xl">
+          <div className="grid sm:grid-cols-2 gap-4 bg-gray-100 p-5 rounded-xl text-lg">
             <p className="flex items-center gap-2 text-gray-700 font-semibold">
               <FaCarSide className="text-secondary" size={22}/> Category:{" "}
               <span className=" text-black">{category}</span>
@@ -171,8 +171,8 @@ const VehicleDetails = () => {
             <div className="bg-gray-100 rounded-xl p-1.5 flex items-center gap-4">
               <IoMdPerson className="text-secondary text-3xl" />
               <div>
-                <p className="font-bold text-gray-800">{owner}</p>
-                <p className="text-gray-700 text-sm">{userEmail}</p>
+                <p className="font-bold text-lg text-gray-800">{owner}</p>
+                <p className="text-gray-700 ">{userEmail}</p>
               </div>
             </div>
           </div>

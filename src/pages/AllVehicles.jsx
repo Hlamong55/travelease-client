@@ -130,7 +130,7 @@ const AllVehicles = () => {
 
         {/* cards */}
         {filteredVehicles.length === 0 ? (
-          <p className="text-center text-gray-500">No vehicles found.</p>
+          <p className="text-lg font-semibold text-center text-gray-600">No vehicles found!!</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {filteredVehicles.map((vehicle, index) => (
@@ -166,6 +166,9 @@ const AllVehicles = () => {
                   >
                     {vehicle.availability}
                   </p>
+
+                    <div className="border-t-2 border-gray-500 border-dashed"></div>
+
                   <div className="flex justify-between items-center px-2">
                   <p className="text-lg font-bold text-purple-700">
                     ${vehicle.pricePerDay} / day

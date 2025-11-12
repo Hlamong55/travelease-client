@@ -73,7 +73,7 @@ const AddVehicle = () => {
           <div className="grid md:grid-cols-2 gap-6">
             {/* car name */}
             <div>
-              <label className="font-semibold text-gray-700">Vehicle Name</label>
+              <label className="text-lg font-semibold text-gray-700">Vehicle Name</label>
               <input
                 type="text"
                 name="name"
@@ -83,7 +83,7 @@ const AddVehicle = () => {
             </div>
             {/* owner */}
             <div>
-              <label className="font-semibold text-gray-700">Owner Name</label>
+              <label className="text-lg font-semibold text-gray-700">Owner Name</label>
               <input
                 type="text"
                 name="owner"
@@ -96,7 +96,7 @@ const AddVehicle = () => {
           <div className="grid md:grid-cols-2 gap-6">
             {/* category */}
             <div>
-              <label className="font-semibold text-gray-700">Category</label>
+              <label className="text-lg font-semibold text-gray-700">Category</label>
               <select
                 name="category"
                 required
@@ -112,7 +112,7 @@ const AddVehicle = () => {
 
             {/* price */}
             <div>
-              <label className="font-semibold text-gray-700">Price Per Day ($)</label>
+              <label className="text-lg font-semibold text-gray-700">Price Per Day ($)</label>
               <input
                 type="number"
                 name="price"
@@ -126,7 +126,7 @@ const AddVehicle = () => {
           <div className="grid md:grid-cols-2 gap-6">
             {/* location */}
             <div>
-              <label className="font-semibold text-gray-700">Location</label>
+              <label className="text-lg font-semibold text-gray-700">Location</label>
               <input
                 type="text"
                 name="location"
@@ -137,7 +137,7 @@ const AddVehicle = () => {
 
             {/* available */}
             <div>
-              <label className="font-semibold text-gray-700">Availability</label>
+              <label className="text-lg font-semibold text-gray-700">Availability</label>
               <select
                 name="availability"
                 required
@@ -151,7 +151,7 @@ const AddVehicle = () => {
 
           {/* car image */}
           <div>
-            <label className="font-semibold text-gray-700">Car Image URL</label>
+            <label className="text-lg font-semibold text-gray-700">Car Image URL</label>
             <input
               type="text"
               name="coverImage"
@@ -163,7 +163,7 @@ const AddVehicle = () => {
 
           {/* description */}
           <div>
-            <label className="font-semibold text-gray-700">Description</label>
+            <label className="text-lg font-semibold text-gray-700">Description</label>
             <textarea
               name="description"
               rows="4"
@@ -174,7 +174,7 @@ const AddVehicle = () => {
 
           {/* email */}
           <div>
-            <label className="font-semibold text-gray-700">User Email</label>
+            <label className="text-lg font-semibold text-gray-700">Your Email</label>
             <input
               type="email"
               value={user?.email || ""}
