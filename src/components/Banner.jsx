@@ -34,7 +34,7 @@ const Banner = () => {
         
         <div className="md:w-1/2 mt-10 md:mt-0">
           <img
-            src="https://i.ibb.co.com/1Yjr5MmN/Blue-and-White-Simple-Car-Rental-Business-Instagram-Post-png.webp"
+            src="https://i.ibb.co.com/6JfzcfmV/Blue-and-White-Simple-Car-Rental-Business-Instagram-Post-png.jpg"
             alt="TravelEase Banner"
             className="w-full rounded-lg shadow-lg"
           />

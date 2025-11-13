@@ -71,7 +71,7 @@ const LatestVehicles = () => {
                   </p>
                   <Link
                     to={`/vehicle/${v._id}`}
-                    className="inline-block bg-secondary text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition"
+                    className="inline-block bg-secondary text-white px-4 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                   >
                     View Details
                   </Link>

@@ -48,7 +48,7 @@ const MyVehicles = () => {
   return (
     <section className="min-h-screen bg-gray-100 py-10 px-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-800 mb-20 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-20 text-center">
           My Vehicles: <span className="text-secondary">{vehicles.length}</span>
         </h1>
 
@@ -112,7 +112,7 @@ const MyVehicles = () => {
                     </Link>
 
                     <Link
-                      to={`/update-vehicle/${vehicle._id}`}
+                      to={`/updateDetails/${vehicle._id}`}
                       className="bg-yellow-400 font-semibold text-sm px-3.5 py-2 rounded-lg hover:bg-yellow-600 hover:text-white shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                     >
                       Update

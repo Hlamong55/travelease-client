@@ -190,7 +190,7 @@ const AddVehicle = () => {
               className={`px-16 py-3 font-semibold rounded-xl transition-all duration-300 ${
                 loading
                   ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-secondary hover:bg-purple-800 text-white shadow-md hover:shadow-xl"
+                  : "bg-secondary hover:bg-purple-800 text-white shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
               }`}
             >
               {loading ? "Adding..." : "Add Vehicle"}

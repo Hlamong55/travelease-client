@@ -3,6 +3,7 @@ import Home from '../pages/Home';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Outlet } from 'react-router';
+import ErrorPage from '../pages/ErrorPage';
 
 
 const HomeLayout = () => {
@@ -21,7 +22,7 @@ const HomeLayout = () => {
             <footer>
                 <Footer></Footer>
             </footer>
-            
+    
         </div>
     );
 };

@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import VehicleDetails from "../pages/VehicleDetails";
 import ErrorPage from "../pages/ErrorPage";
+import UpdateVehicle from "../pages/UpdateVehicle";
 
 export const router = createBrowserRouter([
   {
@@ -27,40 +28,52 @@ export const router = createBrowserRouter([
       },
       {
         path: "vehicle/:id",
-        element: 
+        element: <PrivateRoute>
           <VehicleDetails></VehicleDetails>
-  
+        </PrivateRoute>,
       },
       {
         path: "myVehicles",
-        element: <PrivateRoute>
-          <MyVehicles />
-        </PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyVehicles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myBookings",
-        element: <PrivateRoute>
-          <MyBookings />
-        </PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyBookings />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addVehicle",
-        element: <PrivateRoute>
-          <AddVehicles />
-        </PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AddVehicles />
+          </PrivateRoute>
+        ),
       },
       {
         path: "register",
-        element: <Register />
+        element: <Register />,
       },
       {
         path: "login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
-        path: "/*",
-        element: <ErrorPage></ErrorPage>
+        path: "updateDetails/:id",
+        element: <PrivateRoute>
+          <UpdateVehicle></UpdateVehicle>
+        </PrivateRoute>
       }
     ],
+  },
+  {
+    path: "/*",
+    element: <ErrorPage></ErrorPage>,
   },
 ]);
