@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
+import { differenceInDays } from "date-fns";
 
 const LatestVehicles = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -35,27 +36,34 @@ const LatestVehicles = () => {
           viewport={{ once: true }}
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
         >
-          {vehicles.map((v, index) => (
-            <motion.div
-              key={v._id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all"
-            >
-              <img
-                src={
-                  v.coverImage ||
-                  "https://i.ibb.co/QjkHXLkH/istockphoto-931069196-612x612.jpg"
-                }
-                alt={v.name}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-5 text-left">
-                <p className="badge badge-neutral mb-2">{v.category}</p>
-                <h3 className="text-xl font-bold mb-2">{v.vehicleName}</h3>
-                <p
+          {vehicles.map((v, index) => {
+            const isNew = differenceInDays(new Date(), new Date(v.createdAt)) <= 5;
+            return (
+              <motion.div
+                key={v._id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="relative bg-white shadow-md rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all"
+              >
+                {isNew && (
+                  <span className="absolute top-3 right-3 bg-purple-600 text-white px-2 py-1 rounded-full text-xs">
+                    NEW
+                  </span>
+                )}
+                <img
+                  src={
+                    v.coverImage ||
+                    "https://i.ibb.co/QjkHXLkH/istockphoto-931069196-612x612.jpg"
+                  }
+                  alt={v.name}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-5 text-left">
+                  <p className="badge badge-neutral mb-2">{v.category}</p>
+                  <h3 className="text-xl font-bold mb-2">{v.vehicleName}</h3>
+                  <p
                     className={` font-bold badge badge-outline ${
                       v.availability === "Available"
                         ? "text-green-600"
@@ -65,20 +73,23 @@ const LatestVehicles = () => {
                     {v.availability}
                   </p>
 
-                <div className="flex justify-between items-center mt-5 px-3">
-                  <p className="text-lg font-bold text-purple-700">
-                    ${v.pricePerDay} / day
-                  </p>
-                  <Link
-                    to={`/vehicle/${v._id}`}
-                    className="inline-block bg-secondary text-white px-4 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
-                  >
-                    View Details
-                  </Link>
+                  <p className="text-gray-500 text-sm mt-2">📍{v.location}</p>
+
+                  <div className="flex justify-between items-center mt-3.5 px-3">
+                    <p className="text-lg font-bold text-purple-700">
+                      ${v.pricePerDay} / day
+                    </p>
+                    <Link
+                      to={`/vehicle/${v._id}`}
+                      className="inline-block bg-secondary text-white px-4 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
+                    >
+                      View Details
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

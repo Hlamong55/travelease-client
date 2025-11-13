@@ -57,7 +57,7 @@ const MyVehicles = () => {
              <p className="text-xl font-semibold mb-5 text-gray-600">
             No vehicles found!!
           </p>
-          <Link to="/addVehicle" className="bg-secondary px-8 py-3 font-semibold rounded-xl hover:bg-purple-800 text-white">Add Vehicle</Link>
+          <Link to="/addVehicle" className="bg-secondary px-10 py-3 font-semibold text-xl rounded-xl text-gray-800 hover:bg-purple-800 hover:text-white shadow-lg transform transition hover:scale-105 hover:shadow-2xl">Add Vehicle</Link>
          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">

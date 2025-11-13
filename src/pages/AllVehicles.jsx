@@ -167,6 +167,8 @@ const AllVehicles = () => {
                     {vehicle.availability}
                   </p>
 
+                  <p className="text-gray-500 text-sm ">📍{vehicle.location}</p>
+
                     <div className="border-t-2 border-gray-500 border-dashed"></div>
 
                   <div className="flex justify-between items-center px-2">

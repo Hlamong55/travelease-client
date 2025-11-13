@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { FaCarSide, FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
+import { FaCarSide, FaMapMarkerAlt, FaCheckCircle, FaClock } from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
 import { IoMdPerson } from "react-icons/io";
 import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
+import { PiPhoneCallFill } from "react-icons/pi";
+import { format } from "date-fns";
 
 const VehicleDetails = () => {
   const { id } = useParams();
@@ -41,42 +43,59 @@ const VehicleDetails = () => {
   } = vehicle;
 
   // === handle booking confirm ===
-  const handleBooking = () => {
-    if (availability !== "Available") {
-      Swal.fire({
-        icon: "error",
-        title: "Already Booked",
-        text: "This vehicle has already been booked!",
-        confirmButtonColor: "#6D28D9",
-      });
-      return;
-    }
+  // Booking button click
+const handleBooking = async () => {
+  if (availability !== "Available") return;
 
-    Swal.fire({
-      title: `Confirm Booking?`,
-      text: `Are you sure you want to book ${vehicleName}?`,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#6D28D9",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Book it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosInstance
-          .patch(`/vehicles/${id}`, { availability: "Booked" })
-          .then(() => {
-            setVehicle((prev) => ({ ...prev, availability: "Booked" }));
-            Swal.fire({
-              title: "Booking Confirmed!",
-              text: `${vehicleName} is now booked.`,
-              icon: "success",
-              confirmButtonColor: "#6D28D9",
-            });
-          })
-          .catch((err) => console.error(err));
+  Swal.fire({
+    title: `Confirm Booking?`,
+    text: `Are you sure you want to book ${vehicleName}?`,
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#6D28D9",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Book it!",
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        // ✅ raw Date object
+        const bookingDate = new Date();
+
+        const newBooking = {
+          vehicleId: id,
+          vehicleName,
+          owner,
+          userEmail,
+          pricePerDay,
+          bookingDate, // Date object
+          status: "pending",
+        };
+
+        await axiosInstance.post("/bookings", newBooking);
+
+        // update vehicle availability
+        await axiosInstance.patch(`/vehicles/${id}`, { availability: "Booked" });
+
+        setVehicle((prev) => ({ ...prev, availability: "Booked" }));
+
+        Swal.fire({
+          title: "Booking Placed!",
+          text: `${vehicleName} booking request sent.`,
+          icon: "success",
+          confirmButtonColor: "#6D28D9",
+        });
+      } catch (err) {
+        console.error(err); // check exact error
+        Swal.fire({
+          icon: "error",
+          title: "Booking Failed",
+          text: "Something went wrong. Check console for details.",
+        });
       }
-    });
-  };
+    }
+  });
+};
+
 
   return (
     <section className="bg-gray-100 min-h-screen pb-16">
@@ -117,15 +136,15 @@ const VehicleDetails = () => {
 
           <div className="grid sm:grid-cols-2 gap-4 bg-gray-100 p-5 rounded-xl text-lg">
             <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <FaCarSide className="text-secondary" size={22}/> Category:{" "}
+              <FaCarSide className="text-secondary" size={22} /> Category:{" "}
               <span className=" text-black">{category}</span>
             </p>
             <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <FaMapMarkerAlt className="text-secondary" size={22}/> Location:{" "}
+              <FaMapMarkerAlt className="text-secondary" size={22} /> Location:{" "}
               <span className="text-black">{location}</span>
             </p>
             <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <FaCheckCircle className="text-secondary" size={20}/> Availability:{" "}
+              <FaCheckCircle className="text-secondary" size={20} /> Availability:{" "}
               <span
                 className={`px-3 py-1 rounded-full text-white ${
                   availability === "Available" ? "bg-green-600" : "bg-red-500"
@@ -135,8 +154,7 @@ const VehicleDetails = () => {
               </span>
             </p>
             <p className="flex items-center gap-2 text-gray-700 font-semibold">
-                <GrMoney className="text-secondary" size={22}/> 
-              Price:{" "}
+              <GrMoney className="text-secondary" size={22} /> Price:{" "}
               <span className="text-black">${pricePerDay} / day</span>
             </p>
           </div>
@@ -147,7 +165,7 @@ const VehicleDetails = () => {
               disabled={availability !== "Available"}
               className={`font-semibold px-16 py-3 rounded-xl transition duration-300 shadow-md hover:shadow-xl ${
                 availability === "Available"
-                  ? "bg-secondary hover:bg-purple-800 text-black hover:text-white"
+                  ? "bg-secondary hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl text-black hover:text-white"
                   : "bg-gray-400 text-white cursor-not-allowed"
               }`}
             >
@@ -175,13 +193,23 @@ const VehicleDetails = () => {
                 <p className="text-gray-700 ">{userEmail}</p>
               </div>
             </div>
+
+            <div className="bg-gray-100 mt-1.5 rounded-xl p-1.5 ">
+              <div>
+                <p className="font-semibold flex items-center gap-4 text-gray-800 mb-1">
+                  <PiPhoneCallFill className="text-secondary" size={18} />Contact: 0123456789
+                </p>
+                <p className="text-gray-700 font-semibold flex items-center gap-3">
+                  <FaClock className="text-secondary" size={20} />
+                  Added on: {format(new Date(), "dd MMM yyyy")}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* static */}
           <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">
-              Car Highlights
-            </h3>
+            <h3 className="text-xl font-semibold mb-3 text-gray-800">Car Highlights</h3>
             <ul className="text-gray-700 space-y-1 list-disc pl-6">
               <li>Fuel Type: Petrol / Hybrid</li>
               <li>Transmission: Automatic</li>
