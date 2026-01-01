@@ -28,9 +28,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "vehicle/:id",
-        element: <PrivateRoute>
-          <VehicleDetails></VehicleDetails>
-        </PrivateRoute>,
+        element: <VehicleDetails></VehicleDetails>
       },
       {
         path: "myVehicles",

@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from '../components/Banner';
 import StaticSections from '../components/StaticSection';
 import LatestVehicles from '../components/LatestVehicle';
+import FAQ from '../components/FAQ';
 
 const Home = () => {
     return (
@@ -9,6 +10,8 @@ const Home = () => {
             <Banner></Banner>
             <LatestVehicles></LatestVehicles>
             <StaticSections></StaticSections>
+            <div className='border-t-2 border-gray-400'></div>
+            <FAQ></FAQ>
         </div>
     );
 };

@@ -73,7 +73,7 @@ const StaticSections = () => {
         </div>
       </section>
 
-      <section className="bg-gray-100 border-t-2 border-gray-400">
+      <section className="bg-gray-100">
         <div className="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10">
          
           <motion.div
