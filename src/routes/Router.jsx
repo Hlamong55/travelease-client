@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import VehicleDetails from "../pages/VehicleDetails";
 import ErrorPage from "../pages/ErrorPage";
 import UpdateVehicle from "../pages/UpdateVehicle";
+import HowItWorks from "../pages/HowItWorks";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "allVehicles",
         element: <AllVehicles />,
+      },
+      {
+        path: "how-it-works",
+        element: <HowItWorks></HowItWorks>
       },
       {
         path: "vehicle/:id",

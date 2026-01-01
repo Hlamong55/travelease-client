@@ -14,6 +14,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", to: "/" },
     { name: "All Vehicles", to: "/allVehicles" },
+    { name: "How It Works", to: "/how-it-works" },
     { name: "Add Vehicle", to: "/addVehicle" },
     { name: "My Vehicles", to: "/myVehicles" },
     { name: "My Bookings", to: "/myBookings" },
