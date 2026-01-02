@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axiosInstance = axios.create({
-    baseURL: "https://travelease-server-chi.vercel.app"
+    baseURL: "http://localhost:3000"
 })
 
 const useAxios = () => {
@@ -10,3 +10,6 @@ const useAxios = () => {
 }
 
 export default useAxios;
+
+
+// https://travelease-server-chi.vercel.app

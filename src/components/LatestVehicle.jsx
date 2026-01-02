@@ -34,7 +34,7 @@ const LatestVehicles = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"
         >
           {vehicles.map((v, index) => {
             const isNew = differenceInDays(new Date(), new Date(v.createdAt)) <= 5;
@@ -58,9 +58,9 @@ const LatestVehicles = () => {
                     "https://i.ibb.co/QjkHXLkH/istockphoto-931069196-612x612.jpg"
                   }
                   alt={v.name}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-44 object-cover"
                 />
-                <div className="p-5 text-left">
+                <div className="p-4 text-left">
                   <p className="badge badge-neutral mb-2">{v.category}</p>
                   <h3 className="text-xl font-bold mb-2">{v.vehicleName}</h3>
                   <p
@@ -75,13 +75,13 @@ const LatestVehicles = () => {
 
                   <p className="text-gray-500 text-sm mt-2">📍{v.location}</p>
 
-                  <div className="flex justify-between items-center mt-3.5 px-3">
+                  <div className="flex justify-between items-center mt-3.5 ">
                     <p className="text-lg font-bold text-purple-700">
                       ${v.pricePerDay} / day
                     </p>
                     <Link
                       to={`/vehicle/${v._id}`}
-                      className="inline-block bg-secondary text-white px-4 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
+                      className="inline-block bg-secondary text-white px-2 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                     >
                       View Details
                     </Link>

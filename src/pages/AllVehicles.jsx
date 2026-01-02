@@ -132,7 +132,7 @@ const AllVehicles = () => {
         {filteredVehicles.length === 0 ? (
           <p className="text-lg font-semibold text-center text-gray-600">No vehicles found!!</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
             {filteredVehicles.map((vehicle, index) => (
               <motion.div
                 key={vehicle._id}
@@ -150,7 +150,7 @@ const AllVehicles = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-5 space-y-3">
+                <div className="p-4 space-y-2">
                     <p className="badge badge-neutral ">
                     {vehicle.category}
                   </p>
@@ -171,13 +171,13 @@ const AllVehicles = () => {
 
                     <div className="border-t-2 border-gray-500 border-dashed"></div>
 
-                  <div className="flex justify-between items-center px-2">
+                  <div className="flex justify-between items-center ">
                   <p className="text-lg font-bold text-purple-700">
                     ${vehicle.pricePerDay} / day
                   </p>
                   <Link
                     to={`/vehicle/${vehicle._id}`}
-                    className="inline-block bg-secondary text-white px-4 py-2 rounded-lg hover:bg-purple-800 transition"
+                    className="inline-block bg-secondary text-white px-2 py-1.5 rounded-lg hover:bg-purple-800 transition"
                   >
                     View Details
                   </Link>
