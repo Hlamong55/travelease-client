@@ -2,8 +2,9 @@ import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
-import useAxios from "../hooks/useAxios";
-import useAuth from "../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+
 
 const AddVehicle = () => {
   const axiosInstance = useAxios();

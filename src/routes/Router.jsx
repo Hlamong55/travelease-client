@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import HomeLayout from "../layout/HomeLayout";
 import Home from "../pages/Home";
 import AllVehicles from "../pages/AllVehicles";
-import AddVehicles from "../pages/AddVehicles";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
@@ -16,6 +15,7 @@ import Profile from "../pages/dashboard/Profile";
 import MyVehicles from "../pages/dashboard/MyVehicles";
 import MyBookings from "../pages/dashboard/MyBookings";
 import UpdateVehicle from "../pages/dashboard/UpdateVehicle";
+import AddVehicle from "../pages/dashboard/AddVehicle";
 
 export const router = createBrowserRouter([
   {
@@ -37,14 +37,6 @@ export const router = createBrowserRouter([
       {
         path: "vehicle/:id",
         element: <VehicleDetails></VehicleDetails>
-      },
-      {
-        path: "addVehicle",
-        element: (
-          <PrivateRoute>
-            <AddVehicles />
-          </PrivateRoute>
-        ),
       },
       {
         path: "register",
@@ -87,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "my-bookings",
         element: <MyBookings></MyBookings>
+      },
+      {
+        path: "add-vehicle",
+        element: <AddVehicle></AddVehicle>
       }
     ]
   }
