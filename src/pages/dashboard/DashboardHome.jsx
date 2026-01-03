@@ -67,9 +67,9 @@ const chartData = [
 
 const DashboardHome = () => {
   return (
-    <div className="space-y-10 px-8 py-4">
-      <div>
-        <h2 className="text-2xl font-bold mb-1">Dashboard Overview</h2>
+    <div className="space-y-10 px-8 py-8">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold mb-1 ">Dashboard Overview</h2>
         <p className="text-gray-700 ">
           Welcome back! Here’s a summary of your activity.
         </p>

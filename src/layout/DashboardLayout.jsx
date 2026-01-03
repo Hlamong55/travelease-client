@@ -52,7 +52,6 @@ const DashboardLayout = () => {
 
       {/* Main */}
       <div className="flex-1 flex flex-col">
-        {/* Top Navbar */}
         <header className="h-18 bg-base-200 border-b flex items-center justify-between px-6 md:px-12">
           <div className="flex items-center gap-3">
             <button
@@ -61,8 +60,8 @@ const DashboardLayout = () => {
             >
               <FaBars />
             </button>
-            <h1 className=" text-xl font-bold flex gap-2 ">Welcome,<span className="hidden sm:block ">
-                {user?.displayName || "User"}
+            <h1 className=" text-xl font-bold flex gap-2 ">Welcome to Dashboard<span className="hidden sm:block ">
+                , {user?.displayName || "User"}
               </span></h1>
           </div>
 
@@ -77,22 +76,22 @@ const DashboardLayout = () => {
               
             </div>
 
-            <div className="absolute right-0 mt-3 w-48 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+            <div className="absolute right-0 mt-3 w-48 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all font-semibold">
               <NavLink
                 to="/"
-                className="block px-4 py-2 hover:bg-base-200"
+                className="block px-4 py-2 hover:bg-pink-500 hover:text-white"
               >
                 Home
               </NavLink>
               <NavLink
                 to="/dashboard/profile"
-                className="block px-4 py-2 hover:bg-base-200"
+                className="block px-4 py-2 hover:bg-pink-500 hover:text-white"
               >
                 Profile
               </NavLink>
               <button
                 onClick={handleLogout}
-                className="w-full flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-base-200"
+                className="w-full flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-red-500 hover:text-white"
               >
                 <LuLogOut /> Logout
               </button>
