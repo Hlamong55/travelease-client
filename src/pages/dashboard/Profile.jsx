@@ -83,12 +83,12 @@ const Profile = () => {
           />
 
           <div className="text-center md:text-left">
-            <h3 className="text-xl font-semibold">
+            <h3 className="text-2xl font-bold">
               {user?.displayName || "Anonymous User"}
             </h3>
-            <p className="text-gray-500">{user?.email}</p>
+            <p className="text-gray-700 font-medium">{user?.email}</p>
 
-            <span className="inline-block mt-3 px-4 py-1 rounded-full text-sm bg-primary/10 text-primary font-medium">
+            <span className="inline-block mt-3 px-4 py-1 rounded-full bg-primary/10 text-primary font-semibold">
               User
             </span>
           </div>

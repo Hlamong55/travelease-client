@@ -19,19 +19,17 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  /* PUBLIC ROUTES */
   const publicLinks = [
     { name: "Home", to: "/" },
     { name: "All Vehicles", to: "/allVehicles" },
     { name: "About", to: "/about" },
   ];
 
-  /* PRIVATE ROUTES (DROPDOWN) */
   const privateLinks = [
     { name: "Dashboard", to: "/dashboard", icon: <MdDashboard /> },
-    { name: "Add Vehicle", to: "/addVehicle", icon: <MdAddBox /> },
-    { name: "My Vehicles", to: "/myVehicles", icon: <MdDirectionsCar /> },
-    { name: "My Bookings", to: "/myBookings", icon: <MdBookOnline /> },
+    { name: "Add Vehicle", to: "/dashboard/add-Vehicle", icon: <MdAddBox /> },
+    { name: "My Vehicles", to: "/dashboard/my-Vehicles", icon: <MdDirectionsCar /> },
+    { name: "My Bookings", to: "/dashboard/my-Bookings", icon: <MdBookOnline /> },
   ];
 
   const handleSignOut = () => {
@@ -45,7 +43,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between h-16">
 
-          {/* LOGO */}
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img
               src="https://i.ibb.co.com/QjkHXLkH/istockphoto-931069196-612x612.jpg"
@@ -55,7 +53,6 @@ const Navbar = () => {
             <span className="text-2xl font-bold">TravelEase</span>
           </Link>
 
-          {/* DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-6">
             {publicLinks.map((link) => (
               <NavLink
@@ -63,7 +60,7 @@ const Navbar = () => {
                 to={link.to}
                 className={({ isActive }) =>
                   isActive
-                    ? "text-secondary font-semibold"
+                    ? "text-secondary font-bold"
                     : "hover:text-secondary transition"
                 }
               >
@@ -78,13 +75,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="bg-secondary text-black px-3 py-1 rounded-md flex items-center gap-1"
+                  className="bg-secondary text-black hover:text-white px-3 py-1.5 rounded-md flex items-center gap-1 hover:scale-105 transition"
                 >
                   Login <MdOutlineLogin />
                 </Link>
                 <Link
                   to="/register"
-                  className="bg-white text-black px-3 py-1 rounded-md flex items-center gap-1"
+                  className="bg-white hover:bg-gray-300 text-black px-3 py-1.5 rounded-md flex items-center gap-1 hover:scale-105 transition"
                 >
                   Register <PiUserCirclePlusBold />
                 </Link>
@@ -114,7 +111,7 @@ const Navbar = () => {
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 mt-3 w-60 bg-white text-black rounded-xl shadow-xl overflow-hidden">
+                  <div className="absolute right-0 mt-3 w-64 bg-white text-black rounded-xl shadow-xl overflow-hidden">
                     {/* USER INFO */}
                     <div className="px-4 py-3 border-b bg-purple-200">
                       <p className="font-semibold">
@@ -138,10 +135,9 @@ const Navbar = () => {
                       </Link>
                     ))}
 
-                    {/* LOGOUT */}
                     <button
                       onClick={handleSignOut}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-100 transition text-sm"
+                      className="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-500 transition font-semibold hover:text-white"
                     >
                       <LuLogOut />
                       Logout

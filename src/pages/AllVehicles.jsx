@@ -1,15 +1,24 @@
 import { useEffect, useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useSearchParams } from "react-router";
 import useAxios from "../hooks/useAxios";
-import { Link } from "react-router";
+
+const LIMIT = 12;
 
 const AllVehicles = () => {
   const axiosInstance = useAxios();
-  const [vehicles, setVehicles] = useState([]);
-  const [sortCategory, setSortCategory] = useState("all");
-  const [index, setIndex] = useState(0);
 
+  const [vehicles, setVehicles] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const [page, setPage] = useState(initialPage);
+  const [loading, setLoading] = useState(true);
+  const [sortCategory, setSortCategory] = useState("all");
+
+  // ===== Slider =====
+  const [index, setIndex] = useState(0);
   const slides = [
     {
       id: 1,
@@ -31,20 +40,21 @@ const AllVehicles = () => {
     },
   ];
 
+  useEffect(() => {
+    setSearchParams({ page });
+  }, [page, setSearchParams]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
-
-  useEffect(() => {
+    setLoading(true);
     axiosInstance
-      .get("/vehicles")
-      .then((res) => setVehicles(res.data))
-      .catch((err) => console.error(err));
-  }, [axiosInstance]);
+      .get(`/vehicles?page=${page}&limit=${LIMIT}`)
+      .then((res) => {
+        setVehicles(res.data.vehicles);
+        setTotal(res.data.total);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, [axiosInstance, page]);
 
   const filteredVehicles =
     sortCategory === "all"
@@ -55,139 +65,158 @@ const AllVehicles = () => {
     (v) => v.availability === "Available"
   ).length;
 
+  const totalPages = Math.ceil(total / LIMIT);
+
+  const SkeletonCard = () => (
+    <div className="bg-white rounded-2xl shadow-md p-4 animate-pulse">
+      <div className="h-48 bg-gray-300 rounded-xl mb-4"></div>
+      <div className="h-4 bg-gray-300 w-1/2 mb-2 rounded"></div>
+      <div className="h-4 bg-gray-200 w-3/4 rounded"></div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      <div className="relative w-full overflow-hidden bg-gray-900  shadow-xl  mb-12">
+    <div className="min-h-screen bg-gray-100">
+      {/* Slider */}
+      <div className="relative w-full overflow-hidden bg-gray-900 mb-12">
         <AnimatePresence mode="wait">
           <motion.div
             key={slides[index].id}
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{ duration: 1 }}
             className="relative h-[60vh] flex items-center justify-center"
           >
             <motion.img
               src={slides[index].img}
-              alt={slides[index].title}
-              className="absolute w-full  object-cover"
+              className="absolute w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/50" />
-
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="relative z-10 text-center px-4"
-            >
+            <div className="relative z-10 text-center px-4">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
                 {slides[index].title}
               </h2>
-              <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
+              <p className="text-lg text-gray-200 max-w-2xl mx-auto">
                 {slides[index].subtitle}
               </p>
-            </motion.div>
+            </div>
           </motion.div>
         </AnimatePresence>
-
-        <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2 z-20">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === i ? "bg-secondary scale-125" : "bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto md:mt-20 px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-10 md:gap-4">
-          {/* available + sorting */}
-          <div className="flex items-center gap-2 mb-2">
-            <h2 className="text-3xl md:text-4xl font-bold  text-gray-700">
-              Available Cars:{" "}
-              <span className="text-secondary font-bold">{availableCars}</span>
-            </h2>
-          </div>
+      {/* body */}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+          <h2 className="text-3xl font-bold text-gray-700">
+            Available Cars:{" "}
+            <span className="text-secondary">{availableCars}</span>
+          </h2>
 
-          <div className="flex items-center gap-2">
-            <select
-              className="border border-gray-500 rounded-lg px-3 py-2 text-gray-700 focus:ring-2 focus:ring-secondary"
-              value={sortCategory}
-              onChange={(e) => setSortCategory(e.target.value)}
-            >
-              <option value="all">All Categories</option>
-              <option value="Sedan">Sedan</option>
-              <option value="SUV">SUV</option>
-              <option value="Electric">Electric</option>
-              <option value="Van">Van</option>
-            </select>
-          </div>
+          <select
+            className="border rounded-lg px-4 py-2"
+            value={sortCategory}
+            onChange={(e) => setSortCategory(e.target.value)}
+          >
+            <option value="all">All Categories</option>
+            <option value="Sedan">Sedan</option>
+            <option value="SUV">SUV</option>
+            <option value="Electric">Electric</option>
+            <option value="Van">Van</option>
+          </select>
         </div>
 
-        {/* cards */}
-        {filteredVehicles.length === 0 ? (
-          <p className="text-lg font-semibold text-center text-gray-600">No vehicles found!!</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-            {filteredVehicles.map((vehicle, index) => (
-              <motion.div
-                key={vehicle._id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-2xl shadow-md hover:shadow-lg overflow-hidden hover:-translate-y-1 transition"
-              >
-                <div className="h-48 w-full overflow-hidden">
-                  <motion.img
-                    whileHover={{ scale: 1.05 }}
-                    src={vehicle.coverImage}
-                    alt={vehicle.vehicleName}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 space-y-2">
-                    <p className="badge badge-neutral ">
-                    {vehicle.category}
-                  </p>
-                  <h3 className="text-xl font-bold">
-                    {vehicle.vehicleName}
-                  </h3>
-                  <p
-                    className={` font-bold badge badge-outline ${
-                      vehicle.availability === "Available"
-                        ? "text-green-600"
-                        : "text-red-500"
-                    }`}
-                  >
-                    {vehicle.availability}
-                  </p>
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+          {loading
+            ? Array.from({ length: LIMIT }).map((_, i) => (
+                <SkeletonCard key={i} />
+              ))
+            : filteredVehicles.map((vehicle, index) => (
+                <motion.div
+                  key={vehicle._id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl shadow-md hover:shadow-lg overflow-hidden hover:-translate-y-1 transition"
+                >
+                  <div className="h-48 w-full overflow-hidden">
+                    <motion.img
+                      whileHover={{ scale: 1.05 }}
+                      src={vehicle.coverImage}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-                  <p className="text-gray-500 text-sm ">📍{vehicle.location}</p>
+                  <div className="p-4 space-y-2">
+                    <p className="badge badge-neutral">{vehicle.category}</p>
 
-                    <div className="border-t-2 border-gray-500 border-dashed"></div>
+                    <h3 className="text-xl font-bold">{vehicle.vehicleName}</h3>
 
-                  <div className="flex justify-between items-center ">
-                  <p className="text-lg font-bold text-purple-700">
-                    ${vehicle.pricePerDay} / day
-                  </p>
-                  <Link
-                    to={`/vehicle/${vehicle._id}`}
-                    className="inline-block bg-secondary text-white px-2 py-1.5 rounded-lg hover:bg-purple-800 transition"
-                  >
-                    View Details
-                  </Link>
-                </div>
-                </div>
-                 
-              </motion.div>
-            ))}
-          </div>
-        )}
+                    <p
+                      className={`badge badge-outline font-bold ${
+                        vehicle.availability === "Available"
+                          ? "text-green-600"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {vehicle.availability}
+                    </p>
+
+                    <p className="text-gray-500 text-sm">
+                      📍 {vehicle.location}
+                    </p>
+
+                    <div className="border-t border-dashed my-2"></div>
+
+                    <div className="flex justify-between items-center">
+                      <p className="text-lg font-bold text-purple-700">
+                        ${vehicle.pricePerDay} / day
+                      </p>
+
+                      <Link
+                        to={`/vehicle/${vehicle._id}`}
+                        className="bg-secondary text-white px-3 py-1.5 rounded-lg hover:bg-purple-800 transition"
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+        </div>
+
+        {/* Pagination  */}
+        <div className="flex justify-center items-center gap-4 py-10">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage((p) => p - 1)}
+            className={`px-6 py-2 rounded-lg font-semibold border ${
+              page === 1
+                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                : "bg-white hover:bg-secondary hover:text-white"
+            }`}
+          >
+            Previous
+          </button>
+
+          <span className="font-medium text-gray-700 btn btn-outline">
+            {page}
+          </span>
+
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage((p) => p + 1)}
+            className={`px-6 py-2 rounded-lg font-semibold border ${
+              page === totalPages
+                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                : "bg-white hover:bg-secondary hover:text-white"
+            }`}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router";
 import Swal from "sweetalert2";
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-const Login = () => { 
+const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -22,7 +26,11 @@ const Login = () => {
     setError("");
 
     try {
-      const res = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      const res = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
       Swal.fire({
         title: "✅ Welcome Back!",
         text: `Logged in as ${res.user.displayName || res.user.email}`,
@@ -93,12 +101,16 @@ const Login = () => {
             Welcome Back 👋
           </h2>
           <p className="text-center text-gray-700 mb-8 text-lg">
-            Login to your <span className="font-bold text-purple-700">TravelEase</span> account
+            Login to your{" "}
+            <span className="font-bold text-purple-700">TravelEase</span>{" "}
+            account
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block font-medium text-gray-800 mb-1">Email Address</label>
+              <label className="block font-medium text-gray-800 mb-1">
+                Email Address
+              </label>
               <input
                 name="email"
                 type="email"
@@ -111,7 +123,9 @@ const Login = () => {
             </div>
 
             <div>
-              <label className="block font-medium text-gray-800 mb-1">Password</label>
+              <label className="block font-medium text-gray-800 mb-1">
+                Password
+              </label>
               <input
                 name="password"
                 type="password"
@@ -134,7 +148,7 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full mt-3 bg-linear-to-r from-purple-800 to-indigo-700 text-white font-bold shadow-lg hover:opacity-90 transition-all duration-300 px-6 py-3 rounded-lg"
+              className="w-full mt-3 bg-linear-to-r from-purple-800 to-indigo-700 text-white font-bold shadow-lg hover:opacity-90 hover:scale-105 transition duration-300 px-6 py-3 rounded-lg"
             >
               Login
             </button>
@@ -143,7 +157,7 @@ const Login = () => {
           <div className="mt-6 text-center">
             <button
               onClick={handleGoogleLogin}
-              className="flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-700 text-white border border-gray-300 font-medium py-3 rounded-lg shadow-sm transition-all duration-300"
+              className="flex items-center justify-center gap-2 w-full bg-red-500 hover:bg-red-700 text-white border border-gray-300 font-medium py-3 rounded-lg shadow-sm duration-300 hover:scale-105 transition"
             >
               <img
                 src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -154,7 +168,7 @@ const Login = () => {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-gray-700">
+          <p className="mt-6 text-center text-gray-800">
             Don't have an account?{" "}
             <Link
               to="/register"
@@ -163,7 +177,23 @@ const Login = () => {
               Create Now
             </Link>
           </p>
+
+
+          <button
+          type="button"
+          onClick={() =>
+            setFormData({
+              email: "bruce@lee.com",
+              password: "12345aA!",
+            })
+          }
+          className="w-full mt-5 bg-gray-300 hover:bg-gray-600 hover:text-white font-semibold py-1.5 rounded-lg hover:scale-105 transition"
+        >
+          🚀 Use Demo Account <br />
+          (Click Here to Prefilled)
+        </button>
         </div>
+
       </motion.div>
 
       {/* Right image */}
