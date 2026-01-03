@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 const Banner = () => {
     return (
           <section className="bg-gray-100">
-      <div className="max-w-7xl mx-auto px-6 py-16 text-center md:text-left md:flex md:items-center md:justify-between gap-5">
+      <div className="max-w-7xl mx-auto px-6 py-10 text-center md:text-left md:flex md:items-center md:justify-between gap-5">
         
         <div className="md:w-1/2 space-y-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-black leading-tight">

@@ -1,0 +1,90 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Maya Rahman",
+      "role": "Passenger",
+      "quote": "Booking a car on TravelEase is super simple. I always find clean vehicles and reliable drivers.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=47"
+    },
+    {
+      "id": 2,
+      "name": "Arif Khan",
+      "role": "Car Owner",
+      "quote": "Managing my vehicles and bookings from one dashboard saves me a lot of time every day.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=12"
+    },
+    {
+      "id": 3,
+      "name": "Saba Ahmed",
+      "role": "Passenger",
+      "quote": "The vehicle details and pricing are transparent. I can book with confidence anytime.",
+      "rating": 4,
+      "avatar": "https://i.pravatar.cc/150?img=32"
+    },
+    {
+      "id": 4,
+      "name": "Rifat Chowdhury",
+      "role": "Car Owner",
+      "quote": "TravelEase helped me get more bookings without dealing with phone calls or paperwork.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=55"
+    },
+    {
+      "id": 5,
+      "name": "Nazma Begum",
+      "role": "Passenger",
+      "quote": "I love how quickly I can browse vehicles and check availability before booking.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=56"
+    },
+    {
+      "id": 6,
+      "name": "Imran Hossain",
+      "role": "Car Owner",
+      "quote": "Adding new vehicles and updating availability is fast and straightforward.",
+      "rating": 4,
+      "avatar": "https://i.pravatar.cc/150?img=60"
+    },
+    {
+      "id": 7,
+      "name": "Lina Karim",
+      "role": "Passenger",
+      "quote": "TravelEase made my trip planning stress-free with smooth booking and clear details.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=15"
+    },
+    {
+      "id": 8,
+      "name": "Tariq Aziz",
+      "role": "Car Owner",
+      "quote": "I can track booking requests easily and manage my fleet efficiently.",
+      "rating": 4,
+      "avatar": "https://i.pravatar.cc/150?img=28"
+    },
+    {
+      "id": 9,
+      "name": "Farhana Sultana",
+      "role": "Passenger",
+      "quote": "Secure login and instant booking confirmation make TravelEase very trustworthy.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=68"
+    },
+    {
+      "id": 10,
+      "name": "Zillur Rahman",
+      "role": "Car Owner",
+      "quote": "The platform gives me full control over pricing, availability, and bookings.",
+      "rating": 5,
+      "avatar": "https://i.pravatar.cc/150?img=70"
+    }
+  ],
+  "stats": [
+    { "id": "users", "label": "Happy Passengers", "value": 5200 },
+    { "id": "vehicles", "label": "Registered Vehicles", "value": 780 },
+    { "id": "bookings", "label": "Trips Completed", "value": 16400 },
+    { "id": "owners", "label": "Trusted Car Owners", "value": 310 }
+  ]
+}

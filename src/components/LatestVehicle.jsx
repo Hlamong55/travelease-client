@@ -17,7 +17,7 @@ const LatestVehicles = () => {
   }, [axiosInstance]);
 
   return (
-    <section className="bg-gray-100 py-20 border-t-2 border-gray-300">
+    <section className="bg-gray-100 py-12 border-t-2 border-gray-300">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}

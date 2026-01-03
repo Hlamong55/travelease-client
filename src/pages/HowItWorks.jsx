@@ -34,7 +34,7 @@ const HowItWorks = () => {
      
         <div className="text-center mb-20">
           <h1 className="text-4xl md:text-5xl font-bold text-purple-700 mb-4">
-            How It Works
+            Why Choose TravelEase
           </h1>
           <p className="text-gray-700 max-w-2xl mx-auto font-medium">
             A simple and transparent process for both customers and vehicle owners.

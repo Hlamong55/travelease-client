@@ -23,7 +23,7 @@ const Navbar = () => {
   const publicLinks = [
     { name: "Home", to: "/" },
     { name: "All Vehicles", to: "/allVehicles" },
-    { name: "How It Works", to: "/how-it-works" },
+    { name: "About", to: "/about" },
   ];
 
   /* PRIVATE ROUTES (DROPDOWN) */
@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-primary text-white sticky top-0 z-50 shadow-md w-full">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between h-16">
 
           {/* LOGO */}
@@ -72,7 +72,7 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* AUTH / PROFILE */}
+    
           <div className="hidden md:flex items-center gap-4">
             {!user ? (
               <>
@@ -100,12 +100,13 @@ const Navbar = () => {
                     <img
                       src={user.photoURL}
                       alt="user"
-                      className="w-9 h-9 rounded-full border-2 border-secondary"
+                      className="w-11 h-11 rounded-full border-2 border-secondary"
                     />
                   ) : (
-                    <FaUserCircle size={32} />
+                    <FaUserCircle size={36} />
                   )}
                   <HiChevronDown
+                    size={20}
                     className={`transition ${
                       profileOpen ? "rotate-180" : ""
                     }`}
@@ -113,13 +114,13 @@ const Navbar = () => {
                 </button>
 
                 {profileOpen && (
-                  <div className="absolute right-0 mt-3 w-56 bg-white text-black rounded-xl shadow-xl overflow-hidden">
+                  <div className="absolute right-0 mt-3 w-60 bg-white text-black rounded-xl shadow-xl overflow-hidden">
                     {/* USER INFO */}
-                    <div className="px-4 py-3 border-b">
+                    <div className="px-4 py-3 border-b bg-purple-200">
                       <p className="font-semibold">
                         {user.displayName || "User"}
                       </p>
-                      <p className="text-xs text-gray-500 truncate">
+                      <p className="text-xs text-gray-700 truncate">
                         {user.email}
                       </p>
                     </div>
@@ -130,7 +131,7 @@ const Navbar = () => {
                         key={item.name}
                         to={item.to}
                         onClick={() => setProfileOpen(false)}
-                        className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 transition text-sm"
+                        className="flex items-center gap-3 px-4 py-2 hover:bg-purple-400 transition text-sm font-semibold"
                       >
                         <span className="text-lg">{item.icon}</span>
                         {item.name}
