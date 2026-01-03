@@ -3,8 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import useAxios from "../hooks/useAxios";
-import useAuth from "../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+
 
 const UpdateVehicle = () => {
   const { id } = useParams();

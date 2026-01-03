@@ -12,7 +12,7 @@ const statIcons = {
   users: <FaUsers className="text-3xl text-secondary" />,
   vehicles: <FaCarSide className="text-3xl text-secondary" />,
   bookings: <FaRoute className="text-3xl text-secondary" />,
-  owners: <FaUserTie className="text-3xl text-secondary" />,
+  owners: <FaUserTie className="text-3xl text-secondary " />,
 };
 
 const SPEED = 2; 
@@ -103,7 +103,7 @@ const Testimonials = () => {
                 onClick={() =>
                   (pausedRef.current = !pausedRef.current)
                 }
-                className="w-[300px] sm:w-[340px] shrink-0 border rounded-xl p-6 bg-white hover:shadow-xl transition cursor-pointer"
+                className="w-[300px] sm:w-[340px] shrink-0 border border-purple-500 rounded-xl p-6 bg-white hover:shadow-xl transition cursor-pointer"
               >
                 {/* card */}
                 <div className="flex items-center gap-4 mb-4">

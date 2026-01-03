@@ -3,16 +3,19 @@ import { createBrowserRouter } from "react-router-dom";
 import HomeLayout from "../layout/HomeLayout";
 import Home from "../pages/Home";
 import AllVehicles from "../pages/AllVehicles";
-import MyVehicles from "../pages/MyVehicles";
-import MyBookings from "../pages/MyBookings";
 import AddVehicles from "../pages/AddVehicles";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import VehicleDetails from "../pages/VehicleDetails";
 import ErrorPage from "../pages/ErrorPage";
-import UpdateVehicle from "../pages/UpdateVehicle";
 import HowItWorks from "../pages/HowItWorks";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardHome from "../pages/dashboard/DashboardHome";
+import Profile from "../pages/dashboard/Profile";
+import MyVehicles from "../pages/dashboard/MyVehicles";
+import MyBookings from "../pages/dashboard/MyBookings";
+import UpdateVehicle from "../pages/dashboard/UpdateVehicle";
 
 export const router = createBrowserRouter([
   {
@@ -34,22 +37,6 @@ export const router = createBrowserRouter([
       {
         path: "vehicle/:id",
         element: <VehicleDetails></VehicleDetails>
-      },
-      {
-        path: "myVehicles",
-        element: (
-          <PrivateRoute>
-            <MyVehicles />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "myBookings",
-        element: (
-          <PrivateRoute>
-            <MyBookings />
-          </PrivateRoute>
-        ),
       },
       {
         path: "addVehicle",
@@ -79,4 +66,28 @@ export const router = createBrowserRouter([
     path: "/*",
     element: <ErrorPage></ErrorPage>,
   },
+  {
+    path: "/dashboard",
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+    children: [
+      {
+        index: true,
+        element: <DashboardHome></DashboardHome>
+      },
+      {
+        path: "profile",
+        element: <Profile></Profile>
+      },
+      {
+        path: "my-vehicles",
+        element: <MyVehicles></MyVehicles>
+      },
+      {
+        path: "my-bookings",
+        element: <MyBookings></MyBookings>
+      }
+    ]
+  }
 ]);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import useAxios from "../hooks/useAxios";
+import { Link } from "react-router";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios";
 
 const MyBookings = () => {
   const axiosInstance = useAxios();

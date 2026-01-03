@@ -10,7 +10,7 @@ const Banner = () => {
         
         <div className="md:w-1/2 space-y-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-black leading-tight">
-            <span className="text-secondary md:ml-32">TravelEase</span> <br /> Vehicle Booking &amp; Trip Management Platform
+            <span className="text-secondary md:ml-32 ">TravelEase</span> <br /> Vehicle Booking &amp; Trip Management Platform
           </h1>
           <p className="text-gray-700 text-lg md:text-xl">
             Explore, rent, and manage vehicles with ease. Your travel <br /> companion for a smooth journey.
