@@ -47,9 +47,9 @@ const MyVehicles = () => {
   };
 
   return (
-    <section className="min-h-screen bg-gray-100 py-10 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-20 text-center">
+    <section className="min-h-screen bg-gray-100 py-7 px-5">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-16 text-center">
           My Vehicles: <span className="text-secondary">{vehicles.length}</span>
         </h1>
 
@@ -61,7 +61,7 @@ const MyVehicles = () => {
           <Link to="/addVehicle" className="bg-secondary px-10 py-3 font-semibold text-xl rounded-xl text-gray-800 hover:bg-purple-800 hover:text-white shadow-lg transform transition hover:scale-105 hover:shadow-2xl">Add Vehicle</Link>
          </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-5">
             {vehicles.map((vehicle, index) => (
               <motion.div
                 key={vehicle._id}
@@ -71,7 +71,7 @@ const MyVehicles = () => {
                 viewport={{ once: true }}
                 className="bg-white rounded-2xl shadow-md hover:shadow-lg overflow-hidden hover:-translate-y-1 transition"
               >
-                <div className="h-48 w-full overflow-hidden">
+                <div className="h-44 w-full overflow-hidden">
                   <motion.img
                     whileHover={{ scale: 1.05 }}
                     src={
@@ -84,7 +84,7 @@ const MyVehicles = () => {
                 </div>
 
         
-                <div className="p-5 space-y-3">
+                <div className="p-5 space-y-2">
                   <h3 className="text-xl font-bold">{vehicle.vehicleName}</h3>
 
                   <p
@@ -104,12 +104,12 @@ const MyVehicles = () => {
                     <div className="border-t-2 border-gray-500 border-dashed"></div>
 
                   {/* btns */}
-                  <div className="flex gap-5 justify-center items-center pt-2">
+                  <div className="flex gap-5 justify-center items-center pt-1">
                     <Link
                       to={`/vehicle/${vehicle._id}`}
                       className="bg-secondary text-white font-semibold text-sm px-3 py-2 rounded-lg hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl"
                     >
-                      View Details
+                   Details
                     </Link>
 
                     <Link

@@ -10,10 +10,10 @@ const HomeLayout = () => {
     return (
         <div>
 
-            <header>
+            <header className='h-20'>
                 <Navbar></Navbar>
             </header>
-            <main>
+            <main className='min-h[calc(100vh-80px)]'>
                 <Outlet>
                    
                 </Outlet>

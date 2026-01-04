@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { FaCarSide, FaMapMarkerAlt, FaCheckCircle, FaClock } from "react-icons/fa";
+import {
+  FaCarSide,
+  FaMapMarkerAlt,
+  FaStar,
+  FaUserCircle,
+} from "react-icons/fa";
 import { GrMoney } from "react-icons/gr";
-import { IoMdPerson } from "react-icons/io";
 import useAxios from "../hooks/useAxios";
 import Swal from "sweetalert2";
-import { PiPhoneCallFill } from "react-icons/pi";
-import { format } from "date-fns";
+import { AuthContext } from "../context/AuthContext";
 
 const VehicleDetails = () => {
   const { id } = useParams();
   const axiosInstance = useAxios();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [vehicle, setVehicle] = useState(null);
 
   useEffect(() => {
@@ -24,7 +29,7 @@ const VehicleDetails = () => {
 
   if (!vehicle) {
     return (
-      <div className="flex justify-center items-center min-h-screen text-xl font-semibold text-gray-600">
+      <div className="min-h-screen flex items-center justify-center text-xl font-semibold text-gray-700">
         Loading vehicle details...
       </div>
     );
@@ -42,183 +47,207 @@ const VehicleDetails = () => {
     userEmail,
   } = vehicle;
 
-  // === handle booking confirm ===
-  // Booking button click
-const handleBooking = async () => {
-  if (availability !== "Available") return;
-
-  Swal.fire({
-    title: `Confirm Booking?`,
-    text: `Are you sure you want to book ${vehicleName}?`,
-    icon: "question",
-    showCancelButton: true,
-    confirmButtonColor: "#6D28D9",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Book it!",
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      try {
-        // ✅ raw Date object
-        const bookingDate = new Date();
-
-        const newBooking = {
-          vehicleId: id,
-          vehicleName,
-          owner,
-          userEmail,
-          pricePerDay,
-          bookingDate, // Date object
-          status: "pending",
-        };
-
-        await axiosInstance.post("/bookings", newBooking);
-
-        // update vehicle availability
-        await axiosInstance.patch(`/vehicles/${id}`, { availability: "Booked" });
-
-        setVehicle((prev) => ({ ...prev, availability: "Booked" }));
-
-        Swal.fire({
-          title: "Booking Placed!",
-          text: `${vehicleName} booking request sent.`,
-          icon: "success",
-          confirmButtonColor: "#6D28D9",
-        });
-      } catch (err) {
-        console.error(err); // check exact error
-        Swal.fire({
-          icon: "error",
-          title: "Booking Failed",
-          text: "Something went wrong. Check console for details.",
-        });
-      }
+  /* BOOKING */
+  const handleBooking = async () => {
+    if (!user) {
+      Swal.fire({
+        title: "Login Required 🔒",
+        text: "Please login to book this vehicle.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Login Now",
+        confirmButtonColor: "#7c3aed",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          navigate("/login", { state: { from: `/vehicle/${id}` } });
+        }
+      });
+      return;
     }
-  });
-};
 
+    const result = await Swal.fire({
+      title: "Confirm Booking?",
+      text: `Book ${vehicleName} for $${pricePerDay}/day?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#7c3aed",
+      cancelButtonColor: "#ef4444",
+      confirmButtonText: "Yes, Book It",
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+      await axiosInstance.post("/bookings", {
+        vehicleId: id,
+        vehicleName,
+        pricePerDay,
+        owner,
+        userEmail: user.email,
+        status: "pending",
+        bookingDate: new Date(),
+      });
+
+      await axiosInstance.patch(`/vehicles/${id}`, {
+        availability: "Booked",
+      });
+
+      setVehicle((prev) => ({ ...prev, availability: "Booked" }));
+
+      Swal.fire({
+        icon: "success",
+        title: "Booking Requested 🚗",
+        text: "Your booking request has been sent!",
+        confirmButtonColor: "#7c3aed",
+      });
+    } catch {
+      Swal.fire("Error", "Booking failed. Try again.", "error");
+    }
+  };
 
   return (
-    <section className="bg-gray-100 min-h-screen pb-16">
-      {/* image */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7 }}
-        className="flex justify-center w-full mt-6"
-      >
-        <div className="overflow-hidden rounded-3xl shadow-2xl max-w-7xl ">
-          <img
-            src={
-              coverImage ||
-              "https://i.ibb.co/QjkHXLkH/istockphoto-931069196-612x612.jpg"
-            }
-            alt={vehicleName}
-            className="w-7xl h-[450px] object-cover transform transition-transform duration-700 hover:scale-105"
-          />
-        </div>
-      </motion.div>
-
-      {/* text div */}
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-8 mt-10">
+    <section className="bg-gray-100 min-h-screen py-10">
+      <div className="max-w-7xl mx-auto px-5">
+        {/* IMAGE */}
         <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="md:col-span-2 bg-white shadow-lg rounded-2xl p-8 space-y-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="rounded-3xl overflow-hidden shadow-xl bg-black"
         >
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-              {vehicleName}
-            </h2>
-            <p className="text-lg text-gray-700 leading-relaxed">{description}</p>
+          <img
+            src={coverImage}
+            alt={vehicleName}
+            className="w-full h-[420px] object-contain"
+          />
+        </motion.div>
+
+        {/* TITLE */}
+        <div className="my-8 ml-32">
+          <h1 className="text-4xl font-bold text-gray-800">{vehicleName}</h1>
+          <p className="flex items-center gap-2 text-gray-700 mt-2 font-medium">
+            <FaMapMarkerAlt className="text-purple-600" />
+            {location}
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* LEFT SIDE */}
+          <div className="md:col-span-2 space-y-6">
+            {/* DESCRIPTION */}
+            <div className="bg-white rounded-2xl p-8 shadow space-y-5">
+              <p className="text-gray-700 leading-relaxed text-lg">
+                {description}
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4 bg-gray-50 p-5 rounded-xl">
+                <p className="flex items-center gap-2 font-semibold text-gray-700">
+                  <FaCarSide className="text-purple-600" />
+                  Category: <span className="text-gray-900">{category}</span>
+                </p>
+
+                <p className="flex items-center gap-2 font-semibold text-gray-700">
+                  Availability:
+                  <span
+                    className={`px-3 py-1 rounded-full text-white ${
+                      availability === "Available"
+                        ? "bg-green-600"
+                        : "bg-red-500"
+                    }`}
+                  >
+                    {availability}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            {/* FEATURES */}
+            <div className="bg-white rounded-2xl p-8 shadow">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                Vehicle Features
+              </h3>
+              <ul className="grid sm:grid-cols-2 gap-2 text-gray-700 font-medium">
+                <li>✔ Automatic Transmission</li>
+                <li>✔ Air Conditioning</li>
+                <li>✔ GPS Navigation</li>
+                <li>✔ Comfortable Seating</li>
+                <li>✔ Well Maintained</li>
+                <li>✔ Long Trip Friendly</li>
+              </ul>
+            </div>
+
+            {/* RULES */}
+            <div className="bg-white rounded-2xl p-8 shadow">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                Rental Rules
+              </h3>
+              <ul className="list-disc pl-6 text-gray-700 space-y-1">
+                <li>Valid driving license required</li>
+                <li>Fuel cost not included</li>
+                <li>Late return may incur charges</li>
+                <li>No illegal usage allowed</li>
+              </ul>
+            </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4 bg-gray-100 p-5 rounded-xl text-lg">
-            <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <FaCarSide className="text-secondary" size={22} /> Category:{" "}
-              <span className=" text-black">{category}</span>
-            </p>
-            <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <FaMapMarkerAlt className="text-secondary" size={22} /> Location:{" "}
-              <span className="text-black">{location}</span>
-            </p>
-            <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <FaCheckCircle className="text-secondary" size={20} /> Availability:{" "}
-              <span
-                className={`px-3 py-1 rounded-full text-white ${
-                  availability === "Available" ? "bg-green-600" : "bg-red-500"
+          {/* RIGHT SIDE */}
+          <div className="space-y-6">
+            {/* PRICE */}
+            <div className="bg-white rounded-2xl shadow p-6 text-center">
+              <p className="text-gray-700 font-semibold flex justify-center items-center gap-2">
+                <GrMoney className="text-purple-600" />
+                Price Per Day
+              </p>
+              <h2 className="text-3xl font-bold text-purple-700 my-3">
+                ${pricePerDay}
+              </h2>
+
+              <button
+                onClick={handleBooking}
+                disabled={availability !== "Available"}
+                className={`w-full py-3 rounded-xl font-semibold transition ${
+                  availability === "Available"
+                    ? "bg-purple-600 hover:bg-purple-700 text-white"
+                    : "bg-gray-400 text-white cursor-not-allowed"
                 }`}
               >
-                {availability}
-              </span>
-            </p>
-            <p className="flex items-center gap-2 text-gray-700 font-semibold">
-              <GrMoney className="text-secondary" size={22} /> Price:{" "}
-              <span className="text-black">${pricePerDay} / day</span>
-            </p>
-          </div>
+                {availability === "Available"
+                  ? "Book This Vehicle"
+                  : "Already Booked"}
+              </button>
+            </div>
 
-          <div className="pt-4 text-center">
-            <button
-              onClick={handleBooking}
-              disabled={availability !== "Available"}
-              className={`font-semibold px-16 py-3 rounded-xl transition duration-300 shadow-md hover:shadow-xl ${
-                availability === "Available"
-                  ? "bg-secondary hover:bg-purple-800 shadow-lg transform transition hover:scale-105 hover:shadow-2xl text-black hover:text-white"
-                  : "bg-gray-400 text-white cursor-not-allowed"
-              }`}
-            >
-              {availability === "Available" ? "Book Now" : "Already Booked"}
-            </button>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
-          {/* Owner */}
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">
-              Owner Information
-            </h3>
-            <div className="bg-gray-100 rounded-xl p-1.5 flex items-center gap-4">
-              <IoMdPerson className="text-secondary text-3xl" />
-              <div>
-                <p className="font-bold text-lg text-gray-800">{owner}</p>
-                <p className="text-gray-700 ">{userEmail}</p>
+            {/* OWNER */}
+            <div className="bg-white rounded-2xl shadow p-6">
+              <h3 className="font-bold text-lg text-gray-800 mb-3">
+                Vehicle Owner
+              </h3>
+              <div className="flex items-center gap-3">
+                <FaUserCircle className="text-4xl text-purple-600" />
+                <div>
+                  <p className="font-semibold text-gray-800">{owner}</p>
+                  <p className="text-gray-700 text-sm">{userEmail}</p>
+                </div>
               </div>
             </div>
 
-            <div className="bg-gray-100 mt-1.5 rounded-xl p-1.5 ">
-              <div>
-                <p className="font-semibold flex items-center gap-4 text-gray-800 mb-1">
-                  <PiPhoneCallFill className="text-secondary" size={18} />Contact: 0123456789
-                </p>
-                <p className="text-gray-700 font-semibold flex items-center gap-3">
-                  <FaClock className="text-secondary" size={20} />
-                  Added on: {format(new Date(), "dd MMM yyyy")}
-                </p>
+            {/* RATING */}
+            <div className="bg-white rounded-2xl shadow p-6">
+              <h3 className="font-bold text-lg text-gray-800 mb-3">
+                User Rating
+              </h3>
+              <div className="flex gap-1 text-yellow-400 text-xl">
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar className="opacity-40" />
               </div>
+              <p className="text-gray-700 mt-2 text-sm">
+                4.2 average rating from renters
+              </p>
             </div>
           </div>
-
-          {/* static */}
-          <div className="bg-white p-6 rounded-2xl shadow-md">
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">Car Highlights</h3>
-            <ul className="text-gray-700 space-y-1 list-disc pl-6">
-              <li>Fuel Type: Petrol / Hybrid</li>
-              <li>Transmission: Automatic</li>
-              <li>Seating Capacity: 5 Persons</li>
-              <li>Air Conditioning: Yes</li>
-              <li>GPS & Smart Dashboard</li>
-            </ul>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

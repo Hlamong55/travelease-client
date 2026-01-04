@@ -51,7 +51,7 @@ const UpdateVehicle = () => {
           showConfirmButton: false,
           timer: 1800,
         });
-        navigate("/myVehicles");
+        navigate("/my-vehicles");
       })
       .catch(() => {
         Swal.fire({

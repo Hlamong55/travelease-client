@@ -71,7 +71,7 @@ const DashboardLayout = () => {
               <img
                 src={user?.photoURL}
                 alt="user"
-                className="w-11 h-11 rounded-full border"
+                className="w-12 h-12 rounded-full border-2 border-pink-500"
               />
               
             </div>

@@ -40,6 +40,16 @@ const AllVehicles = () => {
     },
   ];
 
+  //  AUTO SLIDER FIX
+useEffect(() => {
+  const interval = setInterval(() => {
+    setIndex((prev) => (prev + 1) % slides.length);
+  }, 3000);
+
+  return () => clearInterval(interval);
+}, [slides.length]);
+
+
   useEffect(() => {
     setSearchParams({ page });
   }, [page, setSearchParams]);
