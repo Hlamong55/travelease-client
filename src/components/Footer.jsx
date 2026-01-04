@@ -1,64 +1,115 @@
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const Footer = () => {
   return (
     <footer className="bg-primary text-white">
-      <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
-        
+      <div className="max-w-6xl mx-auto px-10 py-12 flex flex-col gap-10 md:flex-row md:gap-28">
+
         <div>
-           <div className="flex items-center gap-5 mt-5">
-            <img src="https://i.ibb.co.com/QjkHXLkH/istockphoto-931069196-612x612.jpg" className="rounded-full w-24 h-24" alt="" />
-          
-          <div>
-            <h2 className="text-3xl font-bold mb-3">TravelEase</h2>
-           <p className="text-sm text-gray-200 leading-relaxed">
-            Simplifying your travel experience — rent, ride and relax with ease.
-          </p>
+          <div className="flex items-center gap-4 mb-4">
+            <img
+              src="https://i.ibb.co.com/QjkHXLkH/istockphoto-931069196-612x612.jpg"
+              className="rounded-full w-22 h-22"
+              alt="TravelEase logo"
+            />
+            <div>
+              <h2 className="text-3xl font-bold">TravelEase</h2>
+            </div>
           </div>
-           </div>
-         
-         
+          <p className="text-sm text-gray-200 leading-relaxed">
+            Simplifying your travel experience — rent,  <br />ride and relax with TravelEase.
+          </p>
         </div>
 
-        
-        <div className="md:text-center">
-          <h3 className="text-lg font-semibold mb-3 border-b border-secondary pb-2 inline-block">
+        <div>
+          <h3 className="text-lg font-semibold mb-4 border-b border-secondary pb-2 inline-block">
             Quick Links
           </h3>
           <ul className="space-y-2 text-gray-200">
             <li>
-              <Link to="/" className="hover:text-secondary transition">Home</Link>
+              <Link to="/" className="hover:text-secondary transition">
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/allVehicles" className="hover:text-secondary transition">All Vehicles</Link>
+              <Link to="/about" className="hover:text-secondary transition">
+                About
+              </Link>
             </li>
             <li>
-              <Link to="/addVehicle" className="hover:text-secondary transition">Add Vehicle</Link>
-            </li>
-            <li>
-              <Link to="/myBookings" className="hover:text-secondary transition">My Bookings</Link>
+              <Link to="/allVehicles" className="hover:text-secondary transition">
+                All Vehicles
+              </Link>
             </li>
           </ul>
         </div>
 
-        
         <div>
-          <h3 className="text-lg font-semibold mb-3 border-b border-secondary pb-2 inline-block">
+          <h3 className="text-lg font-semibold mb-4 border-b border-secondary pb-2 inline-block">
+            Contact Info
+          </h3>
+
+          <ul className="space-y-3 text-gray-200">
+            <li className="flex items-center gap-3">
+              <FaEnvelope className="text-secondary" />
+              <span>bijoymarma55@gmail.com</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <FaPhoneAlt className="text-secondary" />
+              <span>+880 1818-470577</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <FaMapMarkerAlt className="text-secondary" />
+              <span>Chattogram, Bangladesh</span>
+            </li>
+          </ul>
+        </div>
+
+
+        <div>
+          <h3 className="text-lg font-semibold mb-4 border-b border-secondary pb-2 inline-block">
             Connect With Us
           </h3>
-          <div className="flex space-x-4 mt-4">
-            <a href="#" className="hover:text-secondary transition">
+          <div className="flex items-center gap-4 mt-4">
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-secondary transition"
+            >
               <FaFacebookF size={20} />
             </a>
-            <a href="#" className="hover:text-secondary transition">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-secondary transition"
+            >
               <FaInstagram size={20} />
             </a>
-            <a href="#" className="hover:text-secondary transition">
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-secondary transition"
+            >
               <FaXTwitter size={20} />
             </a>
-            <a href="#" className="hover:text-secondary transition">
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-secondary transition"
+            >
               <FaLinkedinIn size={20} />
             </a>
           </div>

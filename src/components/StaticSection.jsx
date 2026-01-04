@@ -74,7 +74,7 @@ const StaticSections = () => {
       </section>
 
       <section className="bg-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-10">
+        <div className="max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row items-center gap-20">
          
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -85,7 +85,7 @@ const StaticSections = () => {
           >
             <img
               src="https://i.ibb.co.com/Mk66vCtT/360-F-313468655-r-HXrxj-TPVPZB4-HBOVR6-NUm-UZNNsbh-CGO.jpg"
-              className="rounded-3xl shadow-2xl w-full max-w-md object-cover"
+              className="rounded-3xl shadow-xl w-full max-w-lg object-cover"
             />
           </motion.div>
 
