@@ -10,10 +10,10 @@ TravelEase is a **comprehensive, modern web application** designed for seamless 
 
 | Type | Link |
 | :--- | :--- |
-| **Client Live Site (Frontend)** | [[(https://travel-easy-a9889.web.app/)]] |
-| **Server API (Backend)** | [(https://travelease-server-chi.vercel.app)] |
-| **GitHub Repository (Client)** | [(https://github.com/Hlamong55/travelease-client)]] |
-| **GitHub Repository (Server)** | [(https://github.com/Hlamong55/travelease-server)] |
+| **Client Live Site (Frontend)** | (https://travel-easy-a9889.web.app/) |
+| **Server API (Backend)** | (https://travelease-server-chi.vercel.app) |
+| **GitHub Repository (Client)** | (https://github.com/Hlamong55/travelease-client) |
+| **GitHub Repository (Server)** | (https://github.com/Hlamong55/travelease-server) |
 
 ---
 
