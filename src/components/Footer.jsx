@@ -12,7 +12,7 @@ import { Link } from "react-router";
 const Footer = () => {
   return (
     <footer className="bg-primary text-white">
-      <div className="max-w-6xl mx-auto px-10 py-12 flex flex-col gap-10 md:flex-row md:gap-28">
+      <div className="max-w-7xl mx-auto  py-12 flex flex-col gap-10 md:flex-row md:gap-16 ">
 
         <div>
           <div className="flex items-center gap-4 mb-4">
@@ -26,7 +26,8 @@ const Footer = () => {
             </div>
           </div>
           <p className="text-sm text-gray-200 leading-relaxed">
-            Simplifying your travel experience — rent,  <br />ride and relax with TravelEase.
+            A comprehensive vehicle booking and trip management platform <br />
+            Simplifying your travel experience — rent, ride and relax with TravelEase.
           </p>
         </div>
 
